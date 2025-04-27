@@ -21,7 +21,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.termguicolors = true
 -- Setup lazy.nvim
-require("lazy").setup("plugins", {
+require("lazy").setup("plugins",{
   spec = {
     -- add your plugins here
   },
@@ -41,3 +41,5 @@ vim.cmd [[
 
 vim.wo.number = true
 vim.wo.relativenumber = true
+
+vim.keymap.set("n", "<leader>fall", "<cmd>CellularAutomaton make_it_rain<CR>")
