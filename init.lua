@@ -20,6 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.termguicolors = true
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]]
 -- Setup lazy.nvim
 require("lazy").setup("plugins",{
   spec = {
