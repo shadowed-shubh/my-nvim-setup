@@ -47,3 +47,11 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 
 vim.keymap.set("n", "<C-R>r", "<cmd>CellularAutomaton make_it_rain<CR>")
+
+
+if vim.fn.has("win32") == 1 then
+  vim.g.shell = "powershell"
+  vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+end
