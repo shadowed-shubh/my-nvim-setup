@@ -9,7 +9,7 @@ return {
 			enabled = false,
 		},
 		explorer = {
-			enabled = true,
+			enabled = false,
 			layout = {
 				layout =
 				{
@@ -39,11 +39,8 @@ return {
 	keys = {
 		-- Top Pickers & Explorer
 		{ "<leader><space>", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
-		{ "<leader>,",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
-		{ "<leader>/",       function() Snacks.picker.grep() end,                                    desc = "Grep" },
 		{ "<leader>:",       function() Snacks.picker.command_history() end,                         desc = "Command History" },
 		{ "<leader>n",       function() Snacks.picker.notifications() end,                           desc = "Notification History" },
-		{ "<leader>e",       function() Snacks.explorer() end,                                       desc = "File Explorer" },
 		-- find
 		{ "<leader>fb",      function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
 		{ "<leader>fc",      function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
@@ -68,11 +65,8 @@ return {
 		{ '<leader>s"',      function() Snacks.picker.registers() end,                               desc = "Registers" },
 		{ '<leader>s/',      function() Snacks.picker.search_history() end,                          desc = "Search History" },
 		{ "<leader>sa",      function() Snacks.picker.autocmds() end,                                desc = "Autocmds" },
-		{ "<leader>sb",      function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
 		{ "<leader>sc",      function() Snacks.picker.command_history() end,                         desc = "Command History" },
 		{ "<leader>sC",      function() Snacks.picker.commands() end,                                desc = "Commands" },
-		{ "<leader>sd",      function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
-		{ "<leader>sD",      function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
 		{ "<leader>sh",      function() Snacks.picker.help() end,                                    desc = "Help Pages" },
 		{ "<leader>sH",      function() Snacks.picker.highlights() end,                              desc = "Highlights" },
 		{ "<leader>si",      function() Snacks.picker.icons() end,                                   desc = "Icons" },
@@ -109,24 +103,6 @@ return {
 		{ "<c-_>",           function() Snacks.terminal() end,                                       desc = "which_key_ignore" },
 		{ "]]",              function() Snacks.words.jump(vim.v.count1) end,                         desc = "Next Reference",           mode = { "n", "t" } },
 		{ "[[",              function() Snacks.words.jump(-vim.v.count1) end,                        desc = "Prev Reference",           mode = { "n", "t" } },
-		{
-			"<leader>N",
-			desc = "Neovim News",
-			function()
-				Snacks.win({
-					file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-					width = 0.6,
-					height = 0.6,
-					wo = {
-						spell = false,
-						wrap = false,
-						signcolumn = "yes",
-						statuscolumn = " ",
-						conceallevel = 3,
-					},
-				})
-			end,
-		}
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("User", {

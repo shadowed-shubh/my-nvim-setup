@@ -1,3 +1,4 @@
+require("config.lsp")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -14,16 +15,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.api.nvim_set_option("clipboard","unnamed")
+vim.api.nvim_set_option("clipboard", "unnamed")
 
-
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.termguicolors = true
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]]
+vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]])
+
 -- Setup lazy.nvim
 require("lazy").setup("plugins", {
 	spec = {
@@ -33,25 +31,16 @@ require("lazy").setup("plugins", {
 	checker = { enabled = true },
 })
 
--- Correctly enable termguicolors
+vim.cmd([[colorscheme tokyonight-night]])
 
 -- Transparent background highlights
-vim.cmd [[
+vim.cmd([[
   highlight Normal guibg=none
   highlight NonText guibg=none
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
-]]
+]])
 
 vim.wo.number = true
 vim.wo.relativenumber = true
-
-vim.keymap.set("n", "<C-R>r", "<cmd>CellularAutomaton make_it_rain<CR>")
-
-
-if vim.fn.has("win32") == 1 then
-  vim.g.shell = "powershell"
-  vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
-  vim.opt.shellquote = ""
-  vim.opt.shellxquote = ""
-end
+vim.opt.winborder = 'rounded'
