@@ -1,30 +1,37 @@
 return {
 	{
-		"mason-org/mason.nvim",
-		opts = {
-			ui = {
-				icons = {
-					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗"
-				}
-			}
-		}
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
+		config = true,
 	},
+
 	{
-		"mason-org/mason-lspconfig.nvim",
-		dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+
+		-- IMPORTANT: this ensures it loads BEFORE lsp.lua runs
+		event = "VeryLazy",
+
 		config = function()
-			require("mason-lspconfig").setup {
-				automatic_enable = {
-					ensure_installed = {
-						"lua_ls",
-						"rust_analyzer",
-						"clangd",
-						"pyright",
-					},
-				},
+			local servers = {
+				"lua_ls",
+				"rust_analyzer",
+				"pyright",
+				"clangd",
+				"gopls",
+				"bashls",
+				"marksman",
 			}
-		end
+
+			require("mason-lspconfig").setup({
+				ensure_installed = servers,
+			})
+
+			-- Enable servers safely
+			for _, server in ipairs(servers) do
+				vim.lsp.enable(server)
+			end
+		end,
 	},
 }
+
