@@ -15,7 +15,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.g.python3_host_prog =
+"/home/shubh/.conda/envs/ml/bin/python"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
