@@ -25,10 +25,10 @@ return {
 			[[ ⣿⡿⣻⠗⠀⢠⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⢠⣤⣄⢰⣶⢯⣤⡈⠋⠀⠀⠀⠀⠀⠀⠀⠀⠆⠀⣿⣼ ]],
 		}
 		dashboard.section.buttons.val = {
-			dashboard.button("b", "  > Browse files", ":lua <cmd>Yazi<CR>"),
-			dashboard.button("f", "󰈞  > Find file", ":lua Snacks.dashboard.pick('files')<CR>"),
-			dashboard.button("r", "  > Recent", ":lua Snacks.dashboard.pick('oldfiles')<CR>"),
-			dashboard.button("q", ":( > quit", ":q"),
+			dashboard.button("b", "  > browse files", ":Yazi<CR>"),
+			dashboard.button("f", "󰈞  > find file", ":Telescope find_files<CR>"),
+			dashboard.button("r", "  > recent", ":Telescope oldfiles<CR>"),
+			dashboard.button("q", ":( > quite", ":q<CR>")
 		}
 		alpha.setup(dashboard.opts)
 	end,

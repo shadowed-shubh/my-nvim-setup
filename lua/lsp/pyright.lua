@@ -1,6 +1,4 @@
-require("lspconfig")["pyright"].setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
+return {
 	settings = {
 		python = {
 			analysis = {
@@ -10,4 +8,4 @@ require("lspconfig")["pyright"].setup({
 			},
 		},
 	},
-})
+}

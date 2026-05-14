@@ -6,16 +6,16 @@ return {
 				icons = {
 					package_installed = "✓",
 					package_pending = "➜",
-					package_uninstalled = "✗"
-				}
-			}
-		}
+					package_uninstalled = "✗",
+				},
+			},
+		},
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			automatic_enable = true,
-			ensure_installed = { "lua_ls", "rust_analyzer" }
+			automatic_enable = false,
+			ensure_installed = { "lua_ls", "rust_analyzer", "svelte" },
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
@@ -25,7 +25,8 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		opts = {
-			ensure_installed = { "ast-grep" }
-		}
-	}
+			ensure_installed = { "ast-grep", "black", "prettier", "pyright", "stylua" },
+			run_on_start = false,
+		},
+	},
 }

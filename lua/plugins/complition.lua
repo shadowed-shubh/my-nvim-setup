@@ -81,23 +81,40 @@ return {
 		},
 		opts = {
 			notify_on_error = false,
+			format_on_save = function(bufnr)
+				local disabled = {
+					ipynb = true,
+					markdown = true,
+				}
+				if disabled[vim.bo[bufnr].filetype] then
+					return
+				end
+
+				return {
+					timeout_ms = 1000,
+					lsp_format = "fallback",
+				}
+			end,
 
 			formatters_by_ft = {
-				lua        = { "stylua" },
-				rust       = { "rustfmt" },
+				lua = { "stylua" },
+				rust = { "rustfmt" },
 
-				c          = { "clang_format" },
-				cpp        = { "clang_format" },
+				c = { "clang_format" },
+				cpp = { "clang_format" },
 
-				html       = { "prettier" },
-				css        = { "prettier" },
+				html = { "prettier" },
+				css = { "prettier" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 
-				python     = { "black" },
+				python = { "black" },
 
-				markdown   = { "prettier" },
+				markdown = { "prettier" },
 			},
 		},
+	},
+	{
+		"augmentcode/augment.vim",
 	},
 }

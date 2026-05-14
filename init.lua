@@ -1,4 +1,15 @@
-require("config.lsp")
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+vim.g.python3_host_prog = "/home/shubh/.conda/envs/ml/bin/python"
+
+vim.opt.termguicolors = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.winborder = "rounded"
+vim.opt.updatetime = 250
+vim.opt.signcolumn = "yes"
+vim.opt.clipboard = "unnamedplus"
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,33 +26,28 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.python3_host_prog =
-"/home/shubh/.conda/envs/ml/bin/python"
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.opt.termguicolors = true
-vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]])
+require("config.lsp")
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins", {
-	spec = {
-		-- add your plugins here
-	},
 	install = { colorscheme = { "habamax" } },
 	checker = { enabled = true },
 })
 
-vim.cmd([[colorscheme tokyonight-night]])
+local ok_colorscheme = pcall(vim.cmd.colorscheme, "tokyonight-night")
+if not ok_colorscheme then
+	vim.cmd.colorscheme("habamax")
+end
 
 -- Transparent background highlights
-vim.cmd([[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-]])
-
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.opt.winborder = 'rounded'
+local transparent_group = vim.api.nvim_create_augroup("UserTransparentHighlights", { clear = true })
+vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+	group = transparent_group,
+	callback = function()
+		vim.cmd([[
+			highlight Normal guibg=none ctermbg=none
+			highlight NonText guibg=none ctermbg=none
+			highlight NormalFloat guibg=none ctermbg=none
+		]])
+	end,
+})

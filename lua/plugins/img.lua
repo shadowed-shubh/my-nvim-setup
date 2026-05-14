@@ -1,6 +1,7 @@
 return
 {
 	"3rd/image.nvim",
+	ft = { "markdown", "quarto" },
 	dependencies = {
 		"vhyrro/luarocks.nvim",
 		priority = 1001,
